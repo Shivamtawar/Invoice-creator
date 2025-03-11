@@ -1,0 +1,655 @@
+/* Global Styles */
+:root {
+    --primary-color: #2a2a2a;
+    --accent-color: #404040;
+    --success-color: #34a853;
+    --danger-color: #ea4335;
+    --warning-color: #fbbc05;
+    --light-color: #f8f9fa;
+    --dark-color: #202124;
+    --gray-color: #5f6368;
+    --light-gray-color: #dadce0;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f7;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+/* Container Styles */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+}
+
+.main-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.control-panel {
+    flex: 1;
+    min-width: 350px;
+    max-width: 600px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+}
+
+.invoice-preview {
+    flex: 1;
+    min-width: 500px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+}
+
+/* Control Panel Styles */
+.control-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-gray-color);
+}
+
+.control-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.control-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--gray-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--light-gray-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+}
+
+.btn-secondary {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--light-gray-color);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #2d9348;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d23f31;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Invoice Item Styles */
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 80px;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+}
+
+.item-row input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--light-gray-color);
+    border-radius: var(--border-radius);
+}
+
+.item-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-icon {
+    padding: 6px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modified Invoice Header Layout */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.business-logo {
+    margin-bottom: 20px;
+}
+
+.business-logo img {
+    max-height: 180px; /* Increased from 100px to make logo bigger */
+    max-width: 280px; /* Increased from 200px to make logo bigger */
+}
+
+.invoice-title {
+    text-align: right;
+}
+
+.invoice-title h2 {
+    font-size: 2rem;
+    color: var(--dark-color);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.invoice-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+}
+
+/* Modified Invoice Info Layout */
+.invoice-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.left-column {
+    width: 45%;
+}
+
+.right-column {
+    width: 45%;
+    text-align: right;
+}
+
+.business-info {
+    margin-bottom: 25px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.business-info strong {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: -15px;
+    margin-top: 60px;
+}
+
+.client-info h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.client-info {
+    line-height: 1.4;
+}
+
+.dates-info {
+    line-height: 1.5;
+}
+
+.date-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.date-label {
+    font-weight: normal;
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    color: var(--gray-color);
+}
+
+/* Due Amount Row - New */
+.due-amount-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Ensure items are vertically centered */
+    margin-top: 10px;
+    padding: 8px 5px;
+    background-color: #f5f5f5; /* Light grayish highlight */
+    border-radius: var(--border-radius);
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    overflow: hidden; /* Hide any overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+.due-amount-label {
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    color: var(--dark-color);
+}
+
+.due-amount {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+/* Invoice Table Styles */
+.invoice-items table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.invoice-items th, .invoice-items td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.invoice-items th {
+    background-color: white;
+    color: var(--dark-color);
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Make Item and Quantity bold in the table */
+.invoice-items th:nth-child(1),
+.invoice-items th:nth-child(2) {
+    font-weight: 800;
+}
+
+.invoice-items tbody td:nth-child(1),
+.invoice-items tbody td:nth-child(2) {
+    font-weight: bold;
+}
+
+.invoice-items th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+
+.invoice-items th:last-child {
+    border-top-right-radius: var(--border-radius);
+    text-align: right;
+}
+
+.invoice-items td:last-child {
+    text-align: right;
+}
+
+.invoice-items tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.invoice-items tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Invoice Summary Container with QR Code */
+.invoice-summary-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.qr-code-container {
+    text-align: center;
+    max-width: 150px;
+}
+
+#qr-code-image img {
+    width: 150px;
+    height: 150px;
+    border: 1px solid var(--light-gray-color);
+    border-radius: var(--border-radius);
+}
+
+#qr-code-text {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    color: var(--gray-color);
+}
+
+/* Invoice Summary Styles */
+.invoice-summary {
+    width: 50%;
+    margin-left: auto;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.summary-label {
+    font-weight: normal;
+    color: var(--gray-color);
+}
+
+.discount-reason {
+    font-size: 0.85rem;
+    font-weight: normal;
+    font-style: italic;
+    color: var(--gray-color);
+}
+
+.discount-row .summary-value {
+    color: var(--danger-color);
+}
+
+.total-row {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding-top: 8px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 5px;
+}
+
+/* Notes section styling */
+.invoice-notes {
+    background-color: white;
+    padding: 15px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.invoice-notes h3 {
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+/* Item detailed form */
+.item-details, .addon-details {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.7fr 0.7fr 30px;
+    gap: 10px;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+}
+
+.item-details input, .addon-details input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--light-gray-color);
+    border-radius: var(--border-radius);
+}
+
+.item-details-header, .addon-details-header {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.7fr 0.7fr 30px;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+.item-details-header span, .addon-details-header span {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.delete-item, .delete-addon {
+    background-color: transparent;
+    border: none;
+    color: var(--danger-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-item:hover, .delete-addon:hover {
+    color: #d23f31;
+}
+
+/* Color Themes */
+.theme-blue {
+    --primary-color: #1a73e8;
+    --accent-color: #1967d2;
+}
+
+.theme-teal {
+    --primary-color: #009688;
+    --accent-color: #00796b;
+}
+
+.theme-purple {
+    --primary-color: #673ab7;
+    --accent-color: #5e35b1;
+}
+
+.theme-green {
+    --primary-color: #4caf50;
+    --accent-color: #43a047;
+}
+
+.theme-dark {
+    --primary-color: #424242;
+    --accent-color: #303030;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .control-panel, .invoice-preview {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .invoice-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .left-column, .right-column {
+        width: 100%;
+    }
+    
+    .right-column {
+        text-align: left;
+    }
+    
+    .date-row {
+        justify-content: flex-start;
+    }
+    
+    .due-amount-row {
+        justify-content: flex-start;
+    }
+    
+    .invoice-summary {
+        width: 100%;
+    }
+    
+    .item-details, .item-details-header, 
+    .addon-details, .addon-details-header {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .item-details, .addon-details {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .invoice-summary-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .qr-code-container {
+        margin-bottom: 20px;
+    }
+}
+
+@media print {
+    .control-panel {
+        display: none;
+    }
+    
+    .invoice-preview {
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+/* Add this CSS to fix the due amount styling and enable theme changes */
+.due-amount-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    padding: 8px 5px;
+    background-color: #f5f5f5; /* Light grayish highlight */
+    border-radius: var(--border-radius);
+}
+
+.due-amount-label {
+    font-weight: bold;
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    color: var(--dark-color);
+}
+
+.due-amount {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+/* Theme-specific styles */
+.theme-blue {
+    --primary-color: #1a73e8;
+    --accent-color: #1967d2;
+}
+
+.theme-teal {
+    --primary-color: #009688;
+    --accent-color: #00796b;
+}
+
+.theme-purple {
+    --primary-color: #673ab7;
+    --accent-color: #5e35b1;
+}
+
+.theme-green {
+    --primary-color: #4caf50;
+    --accent-color: #43a047;
+}
+
+.theme-dark {
+    --primary-color: #424242;
+    --accent-color: #303030;
+}

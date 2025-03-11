@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Invoice Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1><i class="fas fa-file-invoice"></i> Professional Invoice Generator</h1>
+        </header>
+        
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="control-section">
+                    <h2>Invoice Information</h2>
+                    <div class="form-group">
+                        <label for="invoice-number">Invoice #</label>
+                        <input type="text" id="invoice-number" placeholder="INV-001">
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-date">Date</label>
+                        <input type="date" id="invoice-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="due-date">Due Date</label>
+                        <input type="date" id="due-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="po-number">PO Number</label>
+                        <input type="text" id="po-number" placeholder="PO-001">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Your Business</h2>
+                    <div class="form-group">
+                        <label for="business-name">Business Name</label>
+                        <input type="text" id="business-name" placeholder="Your Business LLC">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-contact">Contact Person</label>
+                        <input type="text" id="business-contact" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-email">Email</label>
+                        <input type="email" id="business-email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-phone">Phone</label>
+                        <input type="tel" id="business-phone" placeholder="(555) 555-5555">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-logo">Logo (URL or Upload)</label>
+                        <input type="file" id="business-logo-upload" accept="image/*">
+                        <input type="text" id="business-logo-url" placeholder="https://yourlogo.com/logo.png">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Client Information</h2>
+                    <div class="form-group">
+                        <label for="client-name">Client Name</label>
+                        <input type="text" id="client-name" placeholder="Client Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email</label>
+                        <input type="email" id="client-email" placeholder="client@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-phone">Phone</label>
+                        <input type="tel" id="client-phone" placeholder="(555) 555-5555">
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Items</h2>
+                    <div id="items-container">
+                        <!-- Item rows will be added here dynamically -->
+                    </div>
+                    <button id="add-item" class="btn btn-secondary"><i class="fas fa-plus"></i> Add Item</button>
+                </div>
+
+                <div class="control-section">
+                    <h2>Add-ons (Optional)</h2>
+                    <div id="addons-container">
+                        <!-- Add-on rows will be added here dynamically -->
+                    </div>
+                    <button id="add-addon" class="btn btn-secondary"><i class="fas fa-plus"></i> Add Add-on</button>
+                </div>
+
+                <div class="control-section">
+                    <h2>Additional Information</h2>
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+                        <select id="currency">
+                            <option value="$">USD ($)</option>
+                            <option value="€">EUR (€)</option>
+                            <option value="£">GBP (£)</option>
+                            <option value="¥">JPY (¥)</option>
+                            <option value="₹">INR (₹)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tax-rate">Tax Rate (%)</label>
+                        <input type="number" id="tax-rate" placeholder="0" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="discount-type">Discount Type</label>
+                        <select id="discount-type">
+                            <option value="none">None</option>
+                            <option value="percentage">Percentage (%)</option>
+                            <option value="fixed">Fixed Amount</option>
+                        </select>
+                    </div>
+                    <div class="form-group discount-value-container" style="display: none;">
+                        <label for="discount-value">Discount Value</label>
+                        <input type="number" id="discount-value" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group discount-reason-container" style="display: none;">
+                        <label for="discount-reason">Discount Reason</label>
+                        <input type="text" id="discount-reason" placeholder="Special offer">
+                    </div>
+                    <div class="form-group">
+                        <label for="qr-payment">Add QR Code for Payment</label>
+                        <select id="qr-payment">
+                            <option value="none">None</option>
+                            <option value="upi">UPI / Payment App</option>
+                            <option value="custom">Custom QR Code</option>
+                        </select>
+                    </div>
+                    <div class="form-group qr-upi-container" style="display: none;">
+                        <label for="qr-upi-id">UPI ID</label>
+                        <input type="text" id="qr-upi-id" placeholder="yourname@upi">
+                    </div>
+                    <div class="form-group qr-custom-container" style="display: none;">
+                        <label for="qr-custom-upload">Upload QR Code</label>
+                        <input type="file" id="qr-custom-upload" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" placeholder="Payment terms, thank you notes, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h2>Theme</h2>
+                    <div class="form-group">
+                        <label for="color-theme">Color Theme</label>
+                        <select id="color-theme">
+                            <option value="blue">Professional Blue</option>
+                            <option value="teal">Teal</option>
+                            <option value="purple">Purple</option>
+                            <option value="green">Green</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-section actions">
+                    <button id="preview-invoice" class="btn btn-primary"><i class="fas fa-eye"></i> Preview Invoice</button>
+                    <button id="download-pdf" class="btn btn-success"><i class="fas fa-download"></i> Download PDF</button>
+                    <button id="reset-form" class="btn btn-danger"><i class="fas fa-trash"></i> Reset Form</button>
+                </div>
+            </div>
+
+            <div id="invoice-preview" class="invoice-preview theme-blue">
+                <div class="invoice-header">
+                    <div id="preview-logo" class="business-logo">
+                        <img src="your-logo.png" alt="Business Logo">
+                    </div>
+                    <div class="invoice-title">
+                        <h2>INVOICE</h2>
+                        <div id="preview-invoice-number" class="invoice-number">#INV-001</div>
+                    </div>
+                </div>
+
+                <div class="invoice-info">
+                    <div class="left-column">
+                        <div class="business-info">
+                            <strong id="preview-business-name">Your Business LLC</strong><br>
+                            <span id="preview-business-contact">Your Name</span><br>
+                            <span id="preview-business-phone">(555) 555-5555</span><br>
+                            <span id="preview-business-email">your@email.com</span>
+                        </div>
+                        
+                        <div class="client-info">
+                            <h3>Bill To:</h3>
+                            <strong id="preview-client-name">Client Name</strong><br>
+                            <span id="preview-client-phone">(555) 555-5555</span><br>
+                            <span id="preview-client-email">client@email.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="dates-info">
+                            <div class="date-row">
+                                <span class="date-label">Issue Date:</span>
+                                <span id="preview-invoice-date">03/11/2025</span>
+                            </div>
+                            <div class="date-row">
+                                <span class="date-label">Due Date:</span>
+                                <span id="preview-due-date">04/10/2025</span>
+                            </div>
+                            <div class="date-row">
+                                <span class="date-label">PO Number:</span>
+                                <span id="preview-po-number">001</span>
+                            </div> 
+                            <div class="due-amount-row">
+                                <span class="due-amount-label">Due Amount:</span>
+                                <span id="preview-due-amount" class="due-amount">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invoice-items">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="preview-items">
+                            <!-- Item rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="invoice-summary-container">
+                    <div class="qr-code-container" id="qr-code-area" style="display: none;">
+                        <div id="qr-code-image">
+                            <img src="/api/placeholder/150/150" alt="QR Code">
+                        </div>
+                        <div id="qr-code-text">Scan to pay</div>
+                    </div>
+                    
+                    <div class="invoice-summary">
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal:</span>
+                            <span id="preview-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row discount-row" style="display: none;">
+                            <span class="summary-label">Discount: <span id="preview-discount-reason" class="discount-reason"></span></span>
+                            <span id="preview-discount">-$0.00</span>
+                        </div>
+                        <div class="summary-row tax-row" style="display: none;">
+                            <span class="summary-label">Tax:</span>
+                            <span id="preview-tax">$0.00</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span class="summary-label">Total:</span>
+                            <span id="preview-total">$0.00</span>
+                        </div>
+                        <div class="summary-row balance-row">
+                            <span class="summary-label">Balance Due:</span>
+                            <span id="preview-balance-due">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invoice-notes">
+                    <h3>Notes</h3>
+                    <div id="preview-notes">Thank you for your business!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
